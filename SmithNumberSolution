@@ -1,0 +1,72 @@
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+/*
+A Smith number is a composite number, the sum of whose digits is the sum of the digits of its prime factors obtained as a result of prime factorization (excluding 1).
+Sample Input
+378
+Sample Output
+1
+Output Format
+1 if the number is a Smith number.
+0 if the number is a not Smith number.
+Explanation
+378 prime factors are 2,3 ,3 ,3  and 7.
+The sum of its digits is 2+3+3+3+7 =18.
+The sum of the digits of its factors is 3+7+8=18 .
+*/
+public class SmithNumberSolution {
+
+    // Complete the solve function below.
+    static int solve(int n) {
+    List primeFactList = new ArrayList();
+        //finding prime factors
+        int number = n ;
+        int primFactSum=0;
+        int i =0;
+        for( i = 2; i< number ; i++) {
+         while(number % i == 0) {
+             primFactSum += i;
+            number = number / i;
+         }//endwhile
+      }//endfor
+        if (i == number)
+            primFactSum += i;
+        
+        //Finding sum of digits
+        number = n; 
+        int digiSum=0;
+        while(number>0){
+            int digit = number % 10;
+            digiSum += digit;
+            number = number / 10;
+        }
+        //System.out.println("primFactSum "+primFactSum + " digiSum "+digiSum);
+        
+        if(primFactSum == digiSum)
+            return 1;
+        else
+            return 0;
+        
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        int result = solve(n);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
