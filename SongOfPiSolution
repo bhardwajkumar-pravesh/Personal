@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+
+/*
+Sample Input
+
+3
+Can I have a large container of coffee right now
+Can I have a large container of tea right now
+Now I wish I could recollect pi Eureka cried the great inventor Christmas Pudding Christmas Pie Is the problems very center
+Sample Output
+
+It's a pi song.
+It's not a pi song.
+It's a pi song.
+Explanation
+
+If you write down the length of the words in the first case, you will get "3141592653" because length of "can"=3, "I"=1, "have"=4 etc etc. This is clearly the first few digits of Pi.
+
+In the second case you will get "3141592353", which is wrong if you observe it carefully.
+*/
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scanner = new Scanner(System.in);
+        String nStr = scanner.nextLine();
+        int n = Integer.parseInt(nStr);
+        String[] str = new String[n];
+        for (int i=0; i<n; i++){
+            str[i] = scanner.nextLine();
+        }
+        
+        // for (int i=0; i<n; i++){
+        //    System.out.println(str[i]);
+        // }
+        
+        String pi="314159265358979323846";
+        
+         System.out.println();
+        for (int i=0; i<n; i++){
+            StringTokenizer st = new StringTokenizer(str[i]," ");
+            String lpi="";
+            while (st.hasMoreTokens()) {
+                lpi+=st.nextToken().length();
+            }//endwhile
+            //System.out.println("str["+i+"]"+str[i]+", lpi="+lpi);
+          if(lpi.equals(pi)){
+              System.out.println("It's a pi song.");
+          }else if (pi.contains(lpi) ){
+              System.out.println("It's a pi song.");
+          }else{
+              System.out.println("It's not a pi song.");
+          }
+        }//endfor
+    }
+}
