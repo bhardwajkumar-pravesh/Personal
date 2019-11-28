@@ -1,0 +1,53 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+/*
+A modified Kaprekar number is a positive whole number with a special property. If you square it, then split the number into two integers and sum those integers, you have the same value you started with.
+Sample Input
+1
+100
+Sample Output
+
+1 9 45 55 99
+
+Explanation
+These  are the Kaprekar Numbers in the given range.
+*/
+public class KaprekarSolution {
+
+    // Complete the kaprekarNumbers function below.
+    static void kaprekarNumbers(int p, int q) {
+
+        for(;p<q;p++){
+            int sqr= p*p;
+            String sqStr= sqr+"";
+            String firstHalfStr = sqStr.substring(0,sqStr.length()/2);
+            String secHalfStr = sqStr.substring(sqStr.length()/2,sqStr.length());
+            int fHalfNum = (firstHalfStr != null && firstHalfStr != "" && firstHalfStr.length()>0)?Integer.parseInt(firstHalfStr):0;
+            int sHalfNum = (secHalfStr != null && secHalfStr != "" && secHalfStr.length()>0)?Integer.parseInt(secHalfStr):0;
+            int sum = fHalfNum + sHalfNum;
+            if (sum == p)
+                System.out.print (""+p+" ");
+        }
+    
+    }
+
+    
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int p = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        int q = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        kaprekarNumbers(p, q);
+
+        scanner.close();
+    }
+}
